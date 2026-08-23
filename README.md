@@ -38,4 +38,4 @@ The share link API (`src/app/api/display/[code]`) needs `KV_REST_API_URL`/`KV_RE
 
 ## Deploy
 
-Linked to Vercel; `vercel --prod` deploys the working tree.
+GitHub repo `billye2/pokertimer` is connected to the Vercel project: pushes to `main` deploy to production, other branches/PRs get preview URLs. `vercel --prod` still works for an ad-hoc deploy of the local tree.
