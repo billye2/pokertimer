@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import { QRCodeSVG } from "qrcode.react";
 import { AppHeader } from "@/components/app-header";
 import { ClockPanel } from "@/components/director/clock-panel";
 import { PayoutsPanel } from "@/components/director/payouts-panel";
@@ -10,6 +11,14 @@ import { PlayersPanel } from "@/components/director/players-panel";
 import { TablesPanel } from "@/components/director/tables-panel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   activeEntrants,
@@ -23,6 +32,8 @@ import { useTournamentStore } from "@/stores/tournament-store";
 
 export default function DirectorPage() {
   const params = useParams<{ id: string }>();
+  const [shareUrl, setShareUrl] = useState("");
+  const [copied, setCopied] = useState(false);
   const load = useTournamentStore((s) => s.load);
   const shareCode = useTournamentStore((s) => s.shareCode);
   const config = useTournamentStore((s) => s.config);
@@ -57,6 +68,21 @@ export default function DirectorPage() {
     !finished && state.clock.started && active.length === 1 && entries > 1;
   const undoTarget = lastUndoable();
 
+  function openShareDialog() {
+    if (!shareCode) return;
+    setCopied(false);
+    setShareUrl(`${location.origin}/d/${shareCode}`);
+  }
+
+  async function copyShareUrl() {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+    } catch {
+      window.prompt("Copy this display link:", shareUrl);
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <AppHeader
@@ -65,13 +91,7 @@ export default function DirectorPage() {
             {shareCode && (
               <button
                 className="hover:text-foreground transition-colors"
-                onClick={() => {
-                  const url = `${location.origin}/d/${shareCode}`;
-                  void navigator.clipboard.writeText(url).then(
-                    () => alert(`Display link copied:\n${url}\n\nAnyone with this link sees a read-only clock (needs internet).`),
-                    () => alert(`Display link:\n${url}`)
-                  );
-                }}
+                onClick={openShareDialog}
               >
                 Share link
               </button>
@@ -156,6 +176,27 @@ export default function DirectorPage() {
           </TabsContent>
         </Tabs>
       </main>
+      <Dialog open={Boolean(shareUrl)} onOpenChange={(open) => !open && setShareUrl("")}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Share display</DialogTitle>
+            <DialogDescription>
+              Scan this code on another device to follow the live, read-only clock.
+            </DialogDescription>
+          </DialogHeader>
+          {shareUrl && (
+            <div className="mx-auto rounded-lg bg-white p-3" aria-label="Display link QR code">
+              <QRCodeSVG value={shareUrl} size={224} level="M" includeMargin />
+            </div>
+          )}
+          <p className="break-all text-center text-xs text-muted-foreground">{shareUrl}</p>
+          <DialogFooter>
+            <Button className="w-full" onClick={() => void copyShareUrl()}>
+              {copied ? "Copied" : "Copy link"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
