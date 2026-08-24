@@ -15,6 +15,9 @@ export function AppHeader({ right }: { right?: React.ReactNode }) {
           <Link href="/chipsets" className="hover:text-foreground transition-colors">
             Chips
           </Link>
+          <Link href="/account" className="hover:text-foreground transition-colors">
+            Account
+          </Link>
           {right}
         </nav>
       </div>
