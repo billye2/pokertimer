@@ -13,15 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shuffle Up",
+  title: "Tournament Director",
   description:
     "Free poker tournament director. Clock, blind structures, buy-ins, seating, and payouts — works fully offline.",
-  applicationName: "Shuffle Up",
+  applicationName: "Tournament Director",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Shuffle Up",
+    title: "Tournament Director",
   },
 };
 

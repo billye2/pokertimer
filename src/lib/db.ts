@@ -14,7 +14,7 @@ export interface TournamentRecord {
 
 export type StoredEvent = TournamentEvent & { tournamentId: string };
 
-class ShuffleUpDB extends Dexie {
+class TournamentDirectorDB extends Dexie {
   structures!: EntityTable<Structure, "id">;
   chipsets!: EntityTable<Chipset, "id">;
   players!: EntityTable<PlayerProfile, "id">;
@@ -33,7 +33,7 @@ class ShuffleUpDB extends Dexie {
   }
 }
 
-export const db = new ShuffleUpDB();
+export const db = new TournamentDirectorDB();
 
 export async function loadEvents(tournamentId: string): Promise<TournamentEvent[]> {
   const rows = await db.events

@@ -1,8 +1,8 @@
-# Shuffle Up — Poker Tournament Director
+# Tournament Director
 
 A free, offline-first PWA for running home-game and small-club poker tournaments from one device: blind clock, structure generator, buy-in/rebuy bookkeeping, seating, payouts (incl. ICM), and a read-only share link for a second screen.
 
-Live: https://pokertimer-nine.vercel.app
+Live: https://tournamentdir.vercel.app
 
 ## Features
 

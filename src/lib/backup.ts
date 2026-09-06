@@ -37,7 +37,7 @@ export async function exportBackup(): Promise<Blob> {
 export async function importBackup(json: string): Promise<void> {
   const data = JSON.parse(json) as BackupFile;
   if (data.app !== "shuffleup" || data.version !== 1) {
-    throw new Error("Not a Shuffle Up backup file.");
+    throw new Error("Not a Tournament Director backup file.");
   }
   await db.transaction(
     "rw",

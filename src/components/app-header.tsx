@@ -6,7 +6,7 @@ export function AppHeader({ right }: { right?: React.ReactNode }) {
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
           <span className="text-primary text-xl leading-none">♠</span>
-          <span>Shuffle Up</span>
+          <span>Tournament Director</span>
         </Link>
         <nav className="flex items-center gap-4 text-sm text-muted-foreground">
           <Link href="/structures" className="hover:text-foreground transition-colors">

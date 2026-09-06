@@ -1,6 +1,6 @@
 {
-  "name": "Shuffle Up — Poker Tournament Director",
-  "short_name": "Shuffle Up",
+  "name": "Tournament Director",
+  "short_name": "Tournament Director",
   "description": "Clock, blind structures, buy-ins, seating, and payouts — everything a poker tournament director needs, fully offline.",
   "start_url": "/",
   "display": "standalone",

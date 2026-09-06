@@ -1,6 +1,6 @@
 import "server-only";
 
-const FROM = `Shuffle Up <auth@${process.env.RESEND_EMAIL_DOMAIN ?? "cubemetrics.com"}>`;
+const FROM = `Tournament Director <auth@${process.env.RESEND_EMAIL_DOMAIN ?? "cubemetrics.com"}>`;
 
 /** Send the sign-in code. In dev without a key, logs it instead. */
 export async function sendCodeEmail(to: string, code: string): Promise<boolean> {
@@ -18,8 +18,8 @@ export async function sendCodeEmail(to: string, code: string): Promise<boolean> 
     body: JSON.stringify({
       from: FROM,
       to,
-      subject: `${code} is your Shuffle Up sign-in code`,
-      text: `Your Shuffle Up sign-in code is ${code}\n\nIt expires in 10 minutes. If you didn't request it, ignore this email.`,
+      subject: `${code} is your Tournament Director sign-in code`,
+      text: `Your Tournament Director sign-in code is ${code}\n\nIt expires in 10 minutes. If you didn't request it, ignore this email.`,
     }),
   });
   return res.ok;

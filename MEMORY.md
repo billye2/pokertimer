@@ -1,6 +1,6 @@
 # Project Memory
 
-- Production: <https://pokertimer-nine.vercel.app>. Pushing `main` to `billye2/pokertimer` deploys to Vercel production.
+- Production: <https://tournamentdir.vercel.app>. Pushing `main` to `billye2/pokertimer` deploys to Vercel production.
 - Core tournament data is offline-first in IndexedDB (Dexie); it is not stored in Supabase or Postgres.
 - Neon Postgres, through Drizzle and `@neondatabase/serverless`, stores passwordless-auth users and long-lived sessions.
 - Upstash Redis backs two ephemeral concerns: passwordless email codes/rate limiting and remote display snapshots. It must be available through REST environment variables in Vercel.
