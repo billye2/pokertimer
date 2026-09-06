@@ -18,6 +18,9 @@ export function AppHeader({ right }: { right?: React.ReactNode }) {
           <Link href="/account" className="hover:text-foreground transition-colors">
             Account
           </Link>
+          <Link href="/help" className="hover:text-foreground transition-colors">
+            Help
+          </Link>
           {right}
         </nav>
       </div>

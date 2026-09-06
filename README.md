@@ -16,6 +16,7 @@ Live: https://tournamentdir.vercel.app
 - **Share link** (`/d/{code}`) — read-only remote board; the director device pushes snapshots to a Redis-backed endpoint, viewers poll, and a QR code makes sharing to a second device quick.
 - **Offline-first** — every director action is an event in IndexedDB (Dexie); state is a fold over the event log; undo removes the last undoable event. Service worker via Serwist.
 - **Backup/restore** — export and import the local database.
+- **Help** (`/help`) — in-app guide covering setup, clock, players, seating, payouts, display, undo, and backups.
 - **Passwordless sign-in** — email verification codes are rate-limited and stored in Redis; users and device sessions live in Postgres.
 
 ## Stack
