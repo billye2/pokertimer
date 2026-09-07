@@ -13,7 +13,7 @@ Live: https://tournamentdir.vercel.app
 - **Seating** — table/seat assignment and balancing.
 - **Payouts** — configurable payout structures and ICM chop calculations.
 - **Display mode** (`/t/{id}/display`) — full-screen broadcast board for a TV.
-- **Share link** (`/d/{code}`) — read-only remote board; the director device pushes snapshots to a Redis-backed endpoint, viewers poll, and a QR code makes sharing to a second device quick.
+- **Share link** (`/d/{code}`) — read-only remote board; the director device pushes snapshots to a Redis-backed endpoint, viewers poll, and a QR code makes sharing to a second device quick. **New link** in the share dialog regenerates the code and deletes the old snapshot, so a link you handed out stops working immediately.
 - **Offline-first** — every director action is an event in IndexedDB (Dexie); state is a fold over the event log; undo removes the last undoable event. Service worker via Serwist.
 - **Backup/restore** — export and import the local database.
 - **Help** (`/help`) — in-app guide covering setup, clock, players, seating, payouts, display, undo, and backups.
@@ -47,3 +47,9 @@ Without Redis REST credentials, the share-link endpoint returns an error and sig
 ## Deploy
 
 GitHub repo `billye2/pokertimer` is connected to the Vercel project: pushes to `main` deploy to production, other branches/PRs get preview URLs. `vercel --prod` still works for an ad-hoc deploy of the local tree.
+
+The Vercel firewall rate-limits the API per client IP: 30 requests/minute for non-GET `/api/*` (sign-in codes, snapshot writes) and 120 requests/minute for GET `/api/display/*` (viewers poll every 5 s, so ~10 phones on one wifi fit). Manage with `vercel firewall rules list|diff|publish`; revisit the second limit if the viewer poll interval changes.
+
+## License
+
+MIT — see [LICENSE](LICENSE).
