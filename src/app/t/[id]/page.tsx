@@ -43,6 +43,7 @@ export default function DirectorPage() {
   const dispatch = useTournamentStore((s) => s.dispatch);
   const undo = useTournamentStore((s) => s.undo);
   const lastUndoable = useTournamentStore((s) => s.lastUndoable);
+  const regenerateShareCode = useTournamentStore((s) => s.regenerateShareCode);
 
   useEffect(() => {
     void load(params.id);
@@ -72,6 +73,16 @@ export default function DirectorPage() {
     if (!shareCode) return;
     setCopied(false);
     setShareUrl(`${location.origin}/d/${shareCode}`);
+  }
+
+  async function regenerateShareLink() {
+    if (!window.confirm("Create a new share link? Anyone using the current link will lose access.")) {
+      return;
+    }
+    const code = await regenerateShareCode();
+    if (!code) return;
+    setCopied(false);
+    setShareUrl(`${location.origin}/d/${code}`);
   }
 
   async function copyShareUrl() {
@@ -190,10 +201,20 @@ export default function DirectorPage() {
             </div>
           )}
           <p className="break-all text-center text-xs text-muted-foreground">{shareUrl}</p>
-          <DialogFooter>
+          <DialogFooter className="flex-col gap-2 sm:flex-col">
             <Button className="w-full" onClick={() => void copyShareUrl()}>
               {copied ? "Copied" : "Copy link"}
             </Button>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => void regenerateShareLink()}
+            >
+              New link
+            </Button>
+            <p className="text-center text-xs text-muted-foreground">
+              A new link stops the current one from working.
+            </p>
           </DialogFooter>
         </DialogContent>
       </Dialog>

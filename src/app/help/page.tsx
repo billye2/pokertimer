@@ -248,7 +248,9 @@ export default function HelpPage() {
                 on their own phone to follow the clock, blinds, and player count. It is read-only.
                 Your device pushes updates to the link whenever something changes, and viewers see
                 a warning if updates stop arriving. This needs an internet connection on both
-                ends.
+                ends. Anyone with the link can keep watching, so if you want to cut someone off,
+                open Share link and choose <strong>New link</strong>: the old link stops working
+                and you can hand out the new one.
               </li>
             </ul>
           </Section>

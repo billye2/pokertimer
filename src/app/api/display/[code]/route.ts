@@ -58,3 +58,19 @@ export async function POST(
   await r.set(`display:${code}`, body, { ex: TTL_SECONDS });
   return NextResponse.json({ ok: true });
 }
+
+export async function DELETE(
+  _req: NextRequest,
+  ctx: RouteContext<"/api/display/[code]">
+) {
+  const { code } = await ctx.params;
+  if (!CODE_RE.test(code)) {
+    return NextResponse.json({ error: "bad code" }, { status: 400 });
+  }
+  const r = redis();
+  if (!r) {
+    return NextResponse.json({ error: "sync not configured" }, { status: 503 });
+  }
+  await r.del(`display:${code}`);
+  return NextResponse.json({ ok: true });
+}

@@ -48,6 +48,8 @@ interface TournamentStore {
   undo: () => Promise<TournamentEvent | null>;
   lastUndoable: () => TournamentEvent | null;
   updateConfig: (config: TournamentConfig) => Promise<void>;
+  /** Replace the display share code so the old link stops working. Returns the new code. */
+  regenerateShareCode: () => Promise<string | null>;
 }
 
 export const useTournamentStore = create<TournamentStore>((set, get) => ({
@@ -141,5 +143,21 @@ export const useTournamentStore = create<TournamentStore>((set, get) => ({
     if (!id) return;
     await db.tournaments.update(id, { config });
     set({ config });
+  },
+
+  regenerateShareCode: async () => {
+    const { id, shareCode: oldCode } = get();
+    if (!id) return null;
+    const shareCode = newShareCode();
+    await db.tournaments.update(id, { shareCode });
+    set({ shareCode });
+    if (oldCode) {
+      // Best effort: drop the old snapshot so the old link 404s right away
+      // instead of showing a stale board until its TTL runs out.
+      void fetch(`/api/display/${oldCode}`, { method: "DELETE", keepalive: true }).catch(
+        () => {}
+      );
+    }
+    return shareCode;
   },
 }));
