@@ -4,6 +4,26 @@ A free, offline-first PWA for running home-game and small-club poker tournaments
 
 Live: https://tournamentdir.vercel.app
 
+![Display board](docs/screenshots/display-board.jpg)
+
+## Screenshots
+
+| Director: clock | Director: players |
+| --- | --- |
+| ![Clock tab](docs/screenshots/director-clock.jpg) | ![Players tab](docs/screenshots/director-players.jpg) |
+
+| Director: tables | Director: payouts |
+| --- | --- |
+| ![Tables tab](docs/screenshots/director-tables.jpg) | ![Payouts tab](docs/screenshots/director-payouts.jpg) |
+
+| Share link (QR + New link) | New tournament |
+| --- | --- |
+| ![Share dialog](docs/screenshots/share-link.jpg) | ![New tournament form](docs/screenshots/new-tournament.jpg) |
+
+| Home | Blind structures | Help |
+| --- | --- | --- |
+| ![Home](docs/screenshots/home.jpg) | ![Structures](docs/screenshots/structures.jpg) | ![Help](docs/screenshots/help.jpg) |
+
 ## Features
 
 - **Tournament clock** — level timer derived purely from timestamps (survives reloads and sleep), pause/resume, breaks, level sounds, wake lock.
