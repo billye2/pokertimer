@@ -42,3 +42,7 @@ next-env.d.ts
 
 # generated service worker (built from src/app/sw.ts by @serwist/next)
 /public/sw.js
+
+# local working notes (not published)
+/HANDOFF.md
+/MEMORY.md
